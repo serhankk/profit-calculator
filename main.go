@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bufio"
+	"flag"
 	"fmt"
-	"os"
-	"strings"
 
 	"calc.com/profit-calculator/utils"
 )
@@ -12,49 +10,35 @@ import (
 
 func main(){
 
-	entryPrice := 100.2
-	exitPrice := 121.5
-	
-
-	amount := uint(25)
-
-	changePercetage := float64(25)
-	targetProfit := float64(155)
 
 
-	reader := bufio.NewReader(os.Stdin)
-	option, err := reader.ReadString('\n')
-	option = strings.Replace(option, "\n", "", -1)
-	if err != nil {
-		fmt.Println(err)
-	}
+	options := []string{"change-percentage", "profit-by-price", "price-after-change", "price-for-profit", "change-for-profit"}
 
-	intro_msg := `Select one of the options (number):
-	
-1. Calculate change percentage by ENTRY PRICE and EXIT PRICE
+	option := flag.String("option", options[0], fmt.Sprintf("%v", options))
+	entryPrice := flag.Float64("buy", 0, "Entry price")
+	exitPrice := flag.Float64("sell", 0, "Exit price")
+	amount := flag.Uint("amount", 0, "Amount")
+	targetProfit := flag.Float64("profit", 0, "Target profit")
+	changePercentage := flag.Float64("change", 0, "Change percentage")
 
-2. Calculate profit by ENTRY PRICE, EXIT PRICE and AMOUNT
+	flag.Parse()
 
-3. Calculate price after percentage change by ENTRY PRICE and CHANGE PERCENTAGE
+	// isOptionValid := slices.Contains(options, *option)
 
-4. Calculate target price by TARGET PROFIT
 
-5. Calculate target percentage change by TARGET PROFIT
-`
+	// fmt.Println(changePercentage)
 
-	fmt.Println(intro_msg)
-
-	switch option {
-	case "1":
-		fmt.Println(calculateChangePercentageResult(entryPrice, exitPrice))
-	case "2":
-		fmt.Println(calculateProfitByPrice(entryPrice, exitPrice, amount))
-	case "3":
-		fmt.Println(calculatePriceAfterPercentageChange(entryPrice, changePercetage))
-	case "4":
-		fmt.Println(calculateTargetPriceByTargetProfit(entryPrice, amount, targetProfit))
-	case "5":
-		fmt.Println(calculatePercentageByTargetProfit(entryPrice, amount, targetProfit))
+	switch *option {
+	case options[0]:
+		fmt.Println(calculateChangePercentageResult(*entryPrice, *exitPrice))
+	case options[1]:
+		fmt.Println(calculateProfitByPrice(*entryPrice, *exitPrice, *amount))
+	case options[2]:
+		fmt.Println(calculatePriceAfterPercentageChange(*entryPrice, *changePercentage))
+	case options[3]:
+		fmt.Println(calculateTargetPriceByTargetProfit(*entryPrice, *amount, *targetProfit))
+	case options[4]:
+		fmt.Println(calculatePercentageByTargetProfit(*entryPrice, *amount, *targetProfit))
 	default:
 		fmt.Println("Wrong choice!")
 
