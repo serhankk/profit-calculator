@@ -11,10 +11,6 @@ var isColorEnabled bool = true
 
 func main(){
 
-	
-	
-
-
 	options := []string{"change-percentage", "profit-by-price", "price-after-change", "price-for-profit", "change-for-profit"}
 
 	option := flag.String("option", options[0], fmt.Sprintf("%v", options))
@@ -43,10 +39,7 @@ func main(){
 		fmt.Println(calculateTargetPriceByTargetProfit(*entryPrice, *amount, *targetProfit))
 	case options[4]:
 		fmt.Println(calculatePercentageByTargetProfit(*entryPrice, *amount, *targetProfit))
-
 	}
-
-	
 }
 
 func calculateChangePercentageResult(entryPrice float64, exitPrice float64) string {
