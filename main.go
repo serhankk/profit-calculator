@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"slices"
 
 	"calc.com/profit-calculator/utils"
 )
@@ -23,10 +24,11 @@ func main(){
 
 	flag.Parse()
 
-	// isOptionValid := slices.Contains(options, *option)
-
-
-	// fmt.Println(changePercentage)
+	isOptionValid := slices.Contains(options, *option)
+	if !isOptionValid {
+		fmt.Printf("invalid option: %v\n", *option)
+		fmt.Printf("options: %v\n", options)
+	}
 
 	switch *option {
 	case options[0]:
@@ -39,8 +41,6 @@ func main(){
 		fmt.Println(calculateTargetPriceByTargetProfit(*entryPrice, *amount, *targetProfit))
 	case options[4]:
 		fmt.Println(calculatePercentageByTargetProfit(*entryPrice, *amount, *targetProfit))
-	default:
-		fmt.Println("Wrong choice!")
 
 	}
 
