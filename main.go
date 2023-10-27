@@ -12,17 +12,15 @@ import (
 
 func main(){
 
-	/*
 	entryPrice := 100.2
 	exitPrice := 121.5
 	
-	
-	amount := 25
 
-	changePercetage := 25
-	targetProfit := 155
+	amount := uint(25)
 
-	*/
+	changePercetage := float64(25)
+	targetProfit := float64(155)
+
 
 	reader := bufio.NewReader(os.Stdin)
 	option, err := reader.ReadString('\n')
@@ -41,15 +39,25 @@ func main(){
 
 4. Calculate target price by TARGET PROFIT
 
-5. Calculate target percentage change by TARGET PROFIT.`
+5. Calculate target percentage change by TARGET PROFIT
+`
 
 	fmt.Println(intro_msg)
 
 	switch option {
 	case "1":
-		fmt.Printf("sectin: %v\n", option)
+		fmt.Println(calculateChangePercentageResult(entryPrice, exitPrice))
 	case "2":
-		fmt.Println("sectin: xcvx")
+		fmt.Println(calculateProfitByPrice(entryPrice, exitPrice, amount))
+	case "3":
+		fmt.Println(calculatePriceAfterPercentageChange(entryPrice, changePercetage))
+	case "4":
+		fmt.Println(calculateTargetPriceByTargetProfit(entryPrice, amount, targetProfit))
+	case "5":
+		fmt.Println(calculatePercentageByTargetProfit(entryPrice, amount, targetProfit))
+	default:
+		fmt.Println("Wrong choice!")
+
 	}
 
 	
