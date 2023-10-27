@@ -7,10 +7,12 @@ import (
 
 	"calc.com/profit-calculator/utils"
 )
-
+var isColorEnabled bool = true
 
 func main(){
 
+	
+	
 
 
 	options := []string{"change-percentage", "profit-by-price", "price-after-change", "price-for-profit", "change-for-profit"}
@@ -49,35 +51,35 @@ func main(){
 
 func calculateChangePercentageResult(entryPrice float64, exitPrice float64) string {
 	changePercentageResult := utils.CalculatePercentageChangeBetweenTwoPrices(entryPrice, exitPrice)
-	formattedChangePercentageResult := utils.FormatPercentageChangeBetweenTwoPrices(entryPrice, exitPrice, changePercentageResult)
+	formattedChangePercentageResult := utils.FormatPercentageChangeBetweenTwoPrices(entryPrice, exitPrice, changePercentageResult, isColorEnabled)
 
 	return formattedChangePercentageResult
 }
 
 func calculateProfitByPrice(entryPrice float64, exitPrice float64, amount uint) string {
 	profitByPriceResult := utils.CalculateProfitByPrice(entryPrice, exitPrice, uint(amount))
-	formattedProfitByPriceResult := utils.FormatProfitByPrice(entryPrice, exitPrice, uint(amount), profitByPriceResult)
+	formattedProfitByPriceResult := utils.FormatProfitByPrice(entryPrice, exitPrice, uint(amount), profitByPriceResult, isColorEnabled)
 
 	return formattedProfitByPriceResult
 }
 
 func calculatePriceAfterPercentageChange(entryPrice float64, changePercetage float64) string {
 	priceAfterPercetageChange := utils.CalculatePriceAfterPercentageChange(entryPrice, float64(changePercetage))
-	formattedPriceAfterPercetageChange := utils.FormatPriceAfterPercentageChange(entryPrice, float64(changePercetage), priceAfterPercetageChange)
+	formattedPriceAfterPercetageChange := utils.FormatPriceAfterPercentageChange(entryPrice, float64(changePercetage), priceAfterPercetageChange, isColorEnabled)
 
 	return formattedPriceAfterPercetageChange
 }
 
 func calculateTargetPriceByTargetProfit(entryPrice float64, amount uint, targetProfit float64) string {
 	targetPriceByTargetProfit := utils.CalculateTargetPriceByTargetProfit(entryPrice, uint(amount), float64(targetProfit))
-	formattedTargetPriceByTargetProfit :=  utils.FormatTargetPriceByTargetProfit(entryPrice, uint(amount), float64(targetProfit), targetPriceByTargetProfit)
+	formattedTargetPriceByTargetProfit :=  utils.FormatTargetPriceByTargetProfit(entryPrice, uint(amount), float64(targetProfit), targetPriceByTargetProfit, isColorEnabled)
 
 	return formattedTargetPriceByTargetProfit
 }
 
 func calculatePercentageByTargetProfit(entryPrice float64, amount uint, targetProfit float64) string {
 	targetPercentageByTargetProfit := utils.CalculateTargetPercentageByTargetProfit(entryPrice, uint(amount), float64(targetProfit))
-	formattedTargetPercentageByTargetProfit := utils.FormatTargetPercentageByTargetProfit(entryPrice, uint(amount), float64(targetProfit), targetPercentageByTargetProfit)
+	formattedTargetPercentageByTargetProfit := utils.FormatTargetPercentageByTargetProfit(entryPrice, uint(amount), float64(targetProfit), targetPercentageByTargetProfit, isColorEnabled)
 
 	return formattedTargetPercentageByTargetProfit
 }
