@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"calc.com/profit-calculator/utils"
 )
 
@@ -17,23 +15,19 @@ func main(){
 	targetProfit := 155
 	
 	changePercentageResult := utils.CalculatePercentageChangeBetweenTwoPrices(entryPrice, exitPrice)
-	fmt.Println(utils.FormatPercentageChangeBetweenTwoPrices(entryPrice, exitPrice, changePercentageResult))
+	formattedChangePercentageResult := utils.FormatPercentageChangeBetweenTwoPrices(entryPrice, exitPrice, changePercentageResult)
 
-	myVar2 := utils.CalculateProfitByPrice(entryPrice, exitPrice, uint(amount))
-	// fmt.Println(myVar2)
-	fmt.Println(utils.FormatProfitByPrice(entryPrice, exitPrice, uint(amount), myVar2))
+	profitByPriceResult := utils.CalculateProfitByPrice(entryPrice, exitPrice, uint(amount))
+	formattedProfitByPriceResult := utils.FormatProfitByPrice(entryPrice, exitPrice, uint(amount), profitByPriceResult)
 	
-	myVar3 := utils.CalculatePriceAfterPercentageChange(entryPrice, float64(changePercetange))
-	// fmt.Println(myVar3)
-	fmt.Println(utils.FormatPriceAfterPercentageChange(entryPrice, float64(changePercetange), myVar3))
+	priceAfterPercetangeChange := utils.CalculatePriceAfterPercentageChange(entryPrice, float64(changePercetange))
+	formattedPriceAfterPercetangeChange := utils.FormatPriceAfterPercentageChange(entryPrice, float64(changePercetange), priceAfterPercetangeChange)
 
-	myVar4 := utils.CalculateTargetPriceByTargetProfit(entryPrice, uint(amount), float64(targetProfit))
-	// fmt.Println(myVar4)
-	fmt.Println(utils.FormatTargetPriceByTargetProfit(entryPrice, uint(amount), float64(targetProfit), myVar4))
+	targetPriceByTargetProfit := utils.CalculateTargetPriceByTargetProfit(entryPrice, uint(amount), float64(targetProfit))
+	formattedTargetPriceByTargetProfit :=  utils.FormatTargetPriceByTargetProfit(entryPrice, uint(amount), float64(targetProfit), targetPriceByTargetProfit)
 
-	myVar5 := utils.CalculateTargetPercentageByTargetProfit(entryPrice, uint(amount), float64(targetProfit))
-	// fmt.Println(myVar5)
-	fmt.Println(utils.FormatTargetPercentageByTargetProfit(entryPrice, uint(amount), float64(targetProfit), myVar5))
+	targetPercentageByTargetProfit := utils.CalculateTargetPercentageByTargetProfit(entryPrice, uint(amount), float64(targetProfit))
+	formattedTargetPercentageByTargetProfit := utils.FormatTargetPercentageByTargetProfit(entryPrice, uint(amount), float64(targetProfit), targetPercentageByTargetProfit)
 
 
 }
