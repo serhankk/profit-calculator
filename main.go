@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
 	"slices"
 
 	"calc.com/profit-calculator/utils"
@@ -10,8 +11,14 @@ import (
 var isColorEnabled bool = true
 
 func main(){
-
 	options := []string{"change-percentage", "profit-by-price", "price-after-change", "price-for-profit", "change-for-profit"}
+	if !isOptionPassed() {
+		fmt.Println("Options are: ")
+		for _, val := range options {
+			fmt.Printf("-> %v\n", val)
+		}
+		os.Exit(0)
+	}
 
 	option := flag.String("option", options[0], fmt.Sprintf("%v", options))
 	entryPrice := flag.Float64("buy", 0, "Entry price")
@@ -28,6 +35,7 @@ func main(){
 		fmt.Printf("options: %v\n", options)
 	}
 
+
 	switch *option {
 	case options[0]:
 		fmt.Println(calculateChangePercentageResult(*entryPrice, *exitPrice))
@@ -40,6 +48,10 @@ func main(){
 	case options[4]:
 		fmt.Println(calculatePercentageByTargetProfit(*entryPrice, *amount, *targetProfit))
 	}
+}
+
+func isOptionPassed() (bool) {
+		return len(os.Args) > 1
 }
 
 func calculateChangePercentageResult(entryPrice float64, exitPrice float64) string {
