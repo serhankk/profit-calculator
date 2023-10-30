@@ -2,7 +2,6 @@ package utils
 
 import (
 	"fmt"
-	"reflect"
 
 	"github.com/fatih/color"
 )
@@ -16,7 +15,6 @@ func FormatPercentageChangeBetweenTwoPrices(entryPrice float64, exitPrice float6
 		if change < 0 {
 		colorPrompt = color.New(color.FgRed).SprintFunc()
 	}
-		fmt.Println(reflect.TypeOf(colorPrompt))
 		prompt = fmt.Sprintf("Entry Price: %v \tExit Price: %v\t %s: %%%v", entryPrice, exitPrice, colorPrompt("Change"), change)
 	}
 	return prompt
