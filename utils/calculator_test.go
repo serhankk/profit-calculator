@@ -38,7 +38,7 @@ var calculateProfitData = [5]calculateProfit{
 
 var calculatePriceData = [5]calculatePrice{
 	{200, 4, 208},
-	{55.8, 20, 66.96},
+	{55.8, 20, 66.95},
 	{82, -8, 75.44},
 	{1, 1, 1.01},
 	{50.1, -1, 49.59},
