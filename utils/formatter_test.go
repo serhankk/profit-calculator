@@ -13,6 +13,10 @@ type formatProfit struct {
 	entryPrice, exitPrice, amount, profit float64
 }
 
+type formatPrice struct {
+	entryPrice, change, newPrice float64
+}
+
 var formatChangeData = [5]formatChange{
 	{10, 20, 100},
 	{27.5, 102.1, 271.27},
@@ -27,6 +31,14 @@ var formatProfitData = [5]formatProfit{
 	{220, 13, 160, -780},
 	{155, 50, 155, 0},
 	{155, 800, 150, -4000},
+}
+
+var formatPriceData = [5]formatPrice{
+	{200, 4, 208},
+	{55.8, 20, 66.96},
+	{82, -8, 75.44},
+	{1, 1, 1.01},
+	{50.1, -1, 49.59},
 }
 
 func TestFormatPercentageChangeBetweenTwoPrices(t *testing.T) {
@@ -58,6 +70,28 @@ func TestFormatProfitByPrice(t *testing.T) {
 		result := FormatProfitByPrice(test.entryPrice, test.exitPrice, uint(test.amount), test.profit, true)
 		// "Entry Price: %v \t Exit Price: %v \t %s: %%%v"
 		pattern := `^Entry Price: -?\d+(\.\d+)? \| Exit Price: -?\d+(\.\d+)? \| Profit: -?\d+(\.\d+)?$`
+		t.Logf("pattern: %v\n", pattern)
+		matched, err := regexp.MatchString(pattern, result)
+
+		if err != nil {
+			t.Log(err)
+		}
+		
+		if matched {
+			t.Logf("%v PASSED!", result)
+		} else {
+			t.Errorf("%v FAILED!", result)
+		}
+	}
+}
+
+func TestFormatPriceAfterPercentageChange(t *testing.T) {
+
+	for _, test := range formatPriceData {
+
+		result := FormatPriceAfterPercentageChange(test.entryPrice, test.change, test.newPrice, true)
+		// "Entry Price: %v \t Exit Price: %v \t %s: %%%v"
+		pattern := `^Entry Price: -?\d+(\.\d+)? \| Change: %-?\d+(\.\d+)? \| New Price: -?\d+(\.\d+)?$`
 		t.Logf("pattern: %v\n", pattern)
 		matched, err := regexp.MatchString(pattern, result)
 
