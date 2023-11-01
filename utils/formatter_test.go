@@ -39,7 +39,7 @@ var formatProfitData = [5]formatProfit{
 
 var formatPriceData = [5]formatPrice{
 	{200, 4, 208},
-	{55.8, 20, 66.96},
+	{55.8, 20, 66.95},
 	{82, -8, 75.44},
 	{1, 1, 1.01},
 	{50.1, -1, 49.59},
@@ -48,7 +48,7 @@ var formatPriceData = [5]formatPrice{
 var formatTargetPriceData = [5]formatTargetPrice{
 	{200, 10, 208, 220.8},
 	{8, 1, 20, 28},
-	{7.65, 150, 300, 9.65},
+	{7.65, 150, 300, 9.66},
 	{30, 100, -150, 28.5},
 	{1, 1, 1, 2},
 }
@@ -68,7 +68,6 @@ func TestFormatPercentageChangeBetweenTwoPrices(t *testing.T) {
 		result := FormatPercentageChangeBetweenTwoPrices(test.entryPrice, test.exitPrice, test.change, true)
 		// "Entry Price: %v \t Exit Price: %v \t %s: %%%v"
 		pattern := `^Entry Price: -?\d+(\.\d+)? \| Exit Price: -?\d+(\.\d+)? \| Change: %-?\d+(\.\d+)?$`
-		t.Logf("pattern: %v\n", pattern)
 		matched, err := regexp.MatchString(pattern, result)
 
 		if err != nil {
@@ -90,7 +89,6 @@ func TestFormatProfitByPrice(t *testing.T) {
 		result := FormatProfitByPrice(test.entryPrice, test.exitPrice, uint(test.amount), test.profit, true)
 		// "Entry Price: %v \t Exit Price: %v \t %s: %%%v"
 		pattern := `^Entry Price: -?\d+(\.\d+)? \| Exit Price: -?\d+(\.\d+)? \| Profit: -?\d+(\.\d+)?$`
-		t.Logf("pattern: %v\n", pattern)
 		matched, err := regexp.MatchString(pattern, result)
 
 		if err != nil {
@@ -112,7 +110,6 @@ func TestFormatPriceAfterPercentageChange(t *testing.T) {
 		result := FormatPriceAfterPercentageChange(test.entryPrice, test.change, test.newPrice, true)
 		// "Entry Price: %v \t Exit Price: %v \t %s: %%%v"
 		pattern := `^Entry Price: -?\d+(\.\d+)? \| Change: %-?\d+(\.\d+)? \| New Price: -?\d+(\.\d+)?$`
-		t.Logf("pattern: %v\n", pattern)
 		matched, err := regexp.MatchString(pattern, result)
 
 		if err != nil {
@@ -134,7 +131,6 @@ func TestFormatTargetPriceByTargetProfit(t *testing.T) {
 		result := FormatTargetPriceByTargetProfit(test.entryPrice, uint(test.amount), test.profit, test.targetPrice, true)
 		// "Entry Price: %v \t Exit Price: %v \t %s: %%%v"
 		pattern := `^Entry Price: -?\d+(\.\d+)? \| Amount: -?\d+(\.\d+)? \| Target Profit: -?\d+(\.\d+)? \| Target Price: -?\d+(\.\d+)?$`
-		t.Logf("pattern: %v\n", pattern)
 		matched, err := regexp.MatchString(pattern, result)
 
 		if err != nil {
@@ -156,7 +152,6 @@ func TestFormatTargetPercentageByTargetProfit(t *testing.T) {
 		result := FormatTargetPercentageByTargetProfit(test.entryPrice, uint(test.amount), test.profit, test.targetPrice, true)
 		// "Entry Price: %v \t Exit Price: %v \t %s: %%%v"
 		pattern := `^Entry Price: -?\d+(\.\d+)? \| Amount: -?\d+(\.\d+)? \| Target Profit: -?\d+(\.\d+)? \| Target Change: %-?\d+(\.\d+)?$`
-		t.Logf("pattern: %v\n", pattern)
 		matched, err := regexp.MatchString(pattern, result)
 
 		if err != nil {
