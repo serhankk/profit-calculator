@@ -2,26 +2,12 @@ package utils
 
 import (
 	"fmt"
-	"math"
 
 	"github.com/fatih/color"
 )
 
-func floatLimiter(inputNumber float64) float64 {
-	limitedFloat := math.Floor(inputNumber * 100) / 100
-	fmt.Println(limitedFloat)
-	return limitedFloat
-}
-
 func FormatPercentageChangeBetweenTwoPrices(entryPrice float64, exitPrice float64, change float64, colorEnabled bool) string {
-
-	entryPrice = floatLimiter(entryPrice)
-	exitPrice = floatLimiter(exitPrice)
-	change = floatLimiter(change)
-
 	prompt := fmt.Sprintf("Entry Price: %v | Exit Price: %v | Change: %%%v", entryPrice, exitPrice, change)
-
-
 	if colorEnabled {
 
 		colorPrompt := color.New(color.FgGreen).SprintFunc()
