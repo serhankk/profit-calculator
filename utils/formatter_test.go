@@ -10,14 +10,14 @@ type formatChange struct {
 }
 
 type formatProfit struct {
-	entryPrice, amount, exitPrice, expected float64
+	entryPrice, exitPrice, amount, profit float64
 }
 
 var formatChangeData = [5]formatChange{
 	{10, 20, 100},
 	{27.5, 102.1, 271.27},
 	{56, 22, -60.71},
-	{999999999, 555555555, -44.44},
+	{999999, 555555, -44.44},
 	{1, 1, 0},
 }
 
@@ -44,12 +44,31 @@ func TestFormatPercentageChangeBetweenTwoPrices(t *testing.T) {
 		}
 		
 		if matched {
-			t.Logf("pass: %v", result)
+			t.Logf("%v PASSED!", result)
 		} else {
-			t.Errorf("fail: %v", result)
-			
+			t.Errorf("%v FAILED!", result)
+		}
+	}
+}
+
+func TestFormatProfitByPrice(t *testing.T) {
+
+	for _, test := range formatProfitData {
+
+		result := FormatProfitByPrice(test.entryPrice, test.exitPrice, uint(test.amount), test.profit, true)
+		// "Entry Price: %v \t Exit Price: %v \t %s: %%%v"
+		pattern := `^Entry Price: -?\d+(\.\d+)? \| Exit Price: -?\d+(\.\d+)? \| Profit: -?\d+(\.\d+)?$`
+		t.Logf("pattern: %v\n", pattern)
+		matched, err := regexp.MatchString(pattern, result)
+
+		if err != nil {
+			t.Log(err)
 		}
 		
-
+		if matched {
+			t.Logf("%v PASSED!", result)
+		} else {
+			t.Errorf("%v FAILED!", result)
+		}
 	}
 }
