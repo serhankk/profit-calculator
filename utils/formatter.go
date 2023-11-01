@@ -80,14 +80,14 @@ func FormatTargetPriceByTargetProfit(entryPrice float64, amount uint, targetProf
 
 
 func FormatTargetPercentageByTargetProfit(entryPrice float64, amount uint, targetProfit float64, targetPercentage float64, colorEnabled bool) string {
-	prompt := fmt.Sprintf("Entry Price: %v | Amount: %v | Target Profit: %v | Target Change: %v", entryPrice, amount, targetProfit, targetPercentage)
+	prompt := fmt.Sprintf("Entry Price: %v | Amount: %v | Target Profit: %v | Target Change: %%%v", entryPrice, amount, targetProfit, targetPercentage)
 	if colorEnabled {
 
 		colorPrompt := color.New(color.FgGreen).SprintFunc()
 		if targetPercentage < 0 {
 		colorPrompt = color.New(color.FgRed).SprintFunc()
 	}
-		prompt = fmt.Sprintf("Entry Price: %v | Amount: %v | Target Profit: %v | %s: %v", entryPrice, amount, targetProfit, colorPrompt("Target Change"), targetPercentage)
+		prompt = fmt.Sprintf("Entry Price: %v | Amount: %v | Target Profit: %v | %s: %%%v", entryPrice, amount, targetProfit, colorPrompt("Target Change"), targetPercentage)
 	}
 	return prompt
 }
